@@ -1,0 +1,26 @@
+[
+  {
+    "id": "r1",
+    "name": "Shrimps battle arena",
+    "address": "Back alley of Atlantis ",
+    "cuisine": "Golden fried shrimp balls",
+    "website": "https://shrimpparadise.com",
+    "description": "I like deep fried cuisine. I am sure you would like it too!"
+  },
+  {
+    "id": "r2",
+    "name": "Squid Shack",
+    "address": "Beaches of the dying light",
+    "cuisine": "Takoyaki",
+    "website": "https://takobell.com",
+    "description": "Great dish from the unknown deity"
+  },
+  {
+    "name": "Taste of the divine",
+    "address": "Made in heaven",
+    "cuisine": "Ambrosia",
+    "website": "https://divinegenerals.com",
+    "description": "It is the taste that you can never hope to perceive",
+    "id": "07a5152f-76fe-493c-a3a3-b06fd632c441"
+  }
+]

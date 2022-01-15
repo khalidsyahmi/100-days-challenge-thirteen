@@ -1,0 +1,20 @@
+{
+  "name": "handling-dynamic-routes-errors-and-more-express",
+  "version": "2.0.0",
+  "description": "Dynamic route, errors and more Express",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "KHALID SYAHMI",
+  "license": "POG",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
