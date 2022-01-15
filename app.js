@@ -4,12 +4,17 @@ const path = require("path");
 const express = require("express");
 //unique id packages // object
 const uuid = require("uuid");
+const res = require("express/lib/response");
 
 //to use express function
 const app = express();
 
 //ejs template engine
-app.set("views", path.join(__dirname, "views"));
+app.set("views", [
+  path.join(__dirname, "views"),
+  path.join(__dirname, "views/includes"),
+  path.join(__dirname, "views/errors"), //multiple template views
+]);
 app.set("view engine", "ejs");
 
 //middleware
@@ -51,6 +56,8 @@ app.get("/restaurants/:id", function (req, res) {
       //key=restaurant //passing value=searchId
     }
   }
+
+  res.render("404");
 });
 
 app.get("/recommend", function (req, res) {
@@ -77,6 +84,16 @@ app.get("/confirm", function (req, res) {
 });
 app.get("/about", function (req, res) {
   res.render("about");
+});
+
+//404 error middleware
+app.use(function (req, res) {
+  res.render("404");
+});
+
+//500 error middleware //special error handling
+app.use(function (error, req, res, next) {
+  res.render("500");
 });
 
 app.listen(3000);
