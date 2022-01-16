@@ -6,6 +6,7 @@ const path = require("path");
 //.. denotes up one level in directory
 const filePath = path.join(__dirname, "..", "data", "restaurants.json");
 
+//read
 function getStoredRestaurants() {
   const fileData = fs.readFileSync(filePath);
   const storedRestaurants = JSON.parse(fileData);
@@ -13,7 +14,7 @@ function getStoredRestaurants() {
   return storedRestaurants; // return that parsed file data to anywhere
 }
 
-//
+//write
 function storeRestaurants(storableRest) {
   fs.writeFileSync(filePath, JSON.stringify(storableRest)); //filepath is a const inside a function
 }

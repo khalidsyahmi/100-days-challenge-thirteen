@@ -17,8 +17,22 @@
       <!-- previous brace and preceeding else is together -->
 
       <p>Find your next favorite restaurants with help of our other users!</p>
-      <p>Number of restaurant are <%= numOfRestaurants %> available</p>
       <!-- ejs specific target -->
+      <p>Number of restaurant are <%= numOfRestaurants %> available</p>
+
+      <!-- special case -->
+      <form action="/restaurants" method="GET">
+        <!-- query -->
+        <!-- dynamic property here -->
+        <input
+          type="hidden"
+          value="<%= changeOrder %>"
+          name="order"
+          id="order"
+        />
+        <button class="order-btn">Change Order</button>
+      </form>
+
       <ul id="restaurants-list">
         <!-- opening brace -->
         <%for (const restaurant of restaurants) { %>
