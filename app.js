@@ -1,10 +1,14 @@
 //packages
-const fs = require("fs");
+/* fs to restaurant-read-file.js */
 const path = require("path");
 const express = require("express");
-//unique id packages // object
-const uuid = require("uuid");
-const res = require("express/lib/response");
+
+//uuid to rest.js
+//restData to rest.js
+
+//Express router splitting
+const defaultRoutes = require("./routes/default");
+const defaultRests = require("./routes/rest");
 
 //to use express function
 const app = express();
@@ -13,7 +17,7 @@ const app = express();
 app.set("views", [
   path.join(__dirname, "views"),
   path.join(__dirname, "views/includes"),
-  path.join(__dirname, "views/errors"), //multiple template views
+  path.join(__dirname, "views/errors"), //multiple template views //render methods
 ]);
 app.set("view engine", "ejs");
 
@@ -21,79 +25,21 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 
-app.get("/", function (req, res) {
-  /* const htmlFilePath = path.join(__dirname, "views", "index.html");
-  res.sendFile(htmlFilePath); */
-  //ejs passing files
-  res.render("index");
+/* rest.js */
 
-  /* res.send("<h1>Hello world</h1>"); */
-});
+/* default.js */
 
-app.get("/restaurants", function (req, res) {
-  const filePath = path.join(__dirname, "data", "restaurants.json");
-  const fileData = fs.readFileSync(filePath);
-  const storedRestaurants = JSON.parse(fileData);
-
-  res.render("restaurants", {
-    numOfRestaurants: storedRestaurants.length,
-    restaurants: storedRestaurants,
-  }); // objects // javascript // array from read json file
-});
-
-//dynamic routes
-app.get("/restaurants/:id", function (req, res) {
-  const restaurantId = req.params.id; // params will hold any dynamic placeholder// here it's id
-  //copy of search and read JSON file code
-  const filePath = path.join(__dirname, "data", "restaurants.json");
-  const fileData = fs.readFileSync(filePath);
-  const storedRestaurants = JSON.parse(fileData);
-  //look specific id
-  for (const searchId of storedRestaurants) {
-    if (searchId.id === restaurantId) {
-      //remember to specify the property//here it's the id
-      return res.render("restaurant-detail", { restaurant: searchId });
-      //key=restaurant //passing value=searchId
-    }
-  }
-
-  res.render("404");
-});
-
-app.get("/recommend", function (req, res) {
-  res.render("recommend");
-});
-
-app.post("/recommend", function (req, res) {
-  const restaurant = req.body;
-  restaurant.id = uuid.v4(); //generate uuid //must be in post
-  const filePath = path.join(__dirname, "data", "restaurants.json");
-
-  const fileData = fs.readFileSync(filePath);
-  const storedRestaurants = JSON.parse(fileData);
-
-  storedRestaurants.push(restaurant);
-
-  fs.writeFileSync(filePath, JSON.stringify(storedRestaurants));
-
-  res.redirect("/confirm"); // load data and prevent warning
-});
-
-app.get("/confirm", function (req, res) {
-  res.render("confirm");
-});
-app.get("/about", function (req, res) {
-  res.render("about");
-});
+app.use("/", defaultRoutes); // /active for all incoming requests
+app.use("/", defaultRests); //some explanations needed
 
 //404 error middleware
 app.use(function (req, res) {
-  res.render("404");
+  res.status(404).render("404");
 });
 
 //500 error middleware //special error handling
 app.use(function (error, req, res, next) {
-  res.render("500");
+  res.status(500).render("500");
 });
 
 app.listen(3000);
