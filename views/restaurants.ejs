@@ -24,12 +24,8 @@
       <form action="/restaurants" method="GET">
         <!-- query -->
         <!-- dynamic property here -->
-        <input
-          type="hidden"
-          value="<%= changeOrder %>"
-          name="order"
-          id="order"
-        />
+        <!-- property name="" has significance in route -->
+        <input type="hidden" value="<%= changeOrder %>" name="ordere" />
         <button class="order-btn">Change Order</button>
       </form>
 

@@ -10,16 +10,16 @@ const resData = require("../utility/restaurant-read-file");
 
 //get list of restaurants
 router.get("/restaurants", function (req, res) {
-  let order = req.query.order; //optional? /check if any order key is available
-  let nextOrder = "desc";
+  let order = req.query.ordere; //check if any order key is available // .order here is the name="" property in input
+  let nextOrder = "desc"; // triggers on 1st click
   /*   const filePath = path.join(__dirname, "data", "restaurants.json");
     const fileData = fs.readFileSync(filePath);
     const storedRestaurants = JSON.parse(fileData); */
   //if the value in input property is not set yet
   if (order !== "asc" && order !== "desc") {
-    order = "asc";
+    order = "asc"; //initial value
   }
-  // ??
+  // change back to asc on 2nd iteration // 1st and 3rd will ignore when order = 'asc' and will pass the nextOrder = 'desc'
   if (order === "desc") {
     nextOrder = "asc";
   }
@@ -44,7 +44,7 @@ router.get("/restaurants", function (req, res) {
   }); // objects // javascript // array from read json file
 });
 
-//dynamic routes //restaurant details
+//dynamic routes parameters //restaurant details
 router.get("/restaurants/:id", function (req, res) {
   // params will hold any dynamic placeholder// here it's id
   const restaurantId = req.params.id;
@@ -74,7 +74,7 @@ router.get("/recommend", function (req, res) {
 //submit data request
 router.post("/recommend", function (req, res) {
   const restaurant = req.body;
-  restaurant.id = uuid.v4(); //generate uuid //must be in post
+  restaurant.id = uuid.v4(); //generate uuid //must be in post //generate another data field = .id
   /*   const filePath = path.join(__dirname, "data", "restaurants.json");
     const fileData = fs.readFileSync(filePath);
     const storedRestaurants = JSON.parse(fileData); */
